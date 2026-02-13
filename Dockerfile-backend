@@ -1,0 +1,22 @@
+# Dockerfile-backend
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
+WORKDIR /app
+
+# Copia pom.xml
+COPY backend/sgf/pom.xml ./
+
+# Copia src/
+COPY backend/sgf/src ./src
+
+# Baixa dependências
+RUN mvn dependency:go-offline
+
+# Package
+RUN mvn package -DskipTests
+
+# Runtime
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.jar"]
