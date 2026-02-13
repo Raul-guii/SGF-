@@ -72,11 +72,20 @@
 
     <build>
         <plugins>
-            <!-- Plugin para gerar o jar executável -->
+            <!-- Plugin para copiar recursos com UTF-8 -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <useDefaultDelimiters>true</useDefaultDelimiters>
+                </configuration>
+            </plugin>
+
+            <!-- Plugin para compilar e gerar o JAR executável -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>4.0.1</version>
             </plugin>
         </plugins>
     </build>
