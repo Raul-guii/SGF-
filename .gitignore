@@ -1,0 +1,32 @@
+# =========================
+# Build (Maven)
+# =========================
+target/
+
+# =========================
+# IDE
+# =========================
+.idea/
+*.iml
+out/
+
+# VS Code (se usar)
+.vscode/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Sistema Operacional
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Ambiente / Secrets
+# =========================
+.env
+application-dev.properties
+application-local.properties

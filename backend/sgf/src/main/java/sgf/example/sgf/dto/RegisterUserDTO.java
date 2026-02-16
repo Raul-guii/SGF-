@@ -1,54 +1,36 @@
-package sgf.example.sgf.entity;
+package sgf.example.sgf.dto;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "users")
-public class User {
+public class RegisterUserDTO {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private Long id;
-
-    @Column(nullable = false, unique = true)
+    @NotBlank
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @NotBlank
+    @Email
     private String email;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Size(min = 8)
     private String password;
 
-    @Column(nullable = false)
+    @NotBlank
     private String cpf;
 
-    @Column(nullable = false)
+    @NotBlank
     private String phone;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Role role;
+    public RegisterUserDTO(){}
 
-    public User(Long id, String name, String email, String password, String cpf, String phone, Role role) {
-        this.id = id;
+    public RegisterUserDTO(String name, String email, String password, String cpf, String phone) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.cpf = cpf;
         this.phone = phone;
-        this.role = role;
-    }
-
-    public User() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -89,13 +71,5 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 }
