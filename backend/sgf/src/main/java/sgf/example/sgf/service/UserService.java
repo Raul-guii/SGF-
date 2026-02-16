@@ -1,5 +1,6 @@
 package sgf.example.sgf.service;
 
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -84,6 +85,7 @@ public class UserService implements UserDetailsService {
     }
 
     // edita senha usuario
+    @Transactional
     public void changePassword(String email, ChangePasswordDTO dto){
 
         User user = userRepository.findByEmail(email)

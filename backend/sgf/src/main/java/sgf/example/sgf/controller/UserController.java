@@ -47,7 +47,7 @@ public class UserController {
         return ResponseEntity.ok(updated);
     }
 
-    @PutMapping("/me/password")
+    @PutMapping("/password")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> changePassword(
             @AuthenticationPrincipal UserDetails userDetails,
