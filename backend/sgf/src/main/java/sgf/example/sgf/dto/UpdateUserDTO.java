@@ -3,13 +3,13 @@ package sgf.example.sgf.dto;
 public class UpdateUserDTO {
 
     private String name;
-    private String password;
+    private String phone;
 
     public UpdateUserDTO(){}
 
-    public UpdateUserDTO(String name, String password) {
+    public UpdateUserDTO(String name, String phone) {
         this.name = name;
-        this.password = password;
+        this.phone = phone;
     }
 
     public String getName() {
@@ -20,11 +20,11 @@ public class UpdateUserDTO {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

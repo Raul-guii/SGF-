@@ -76,9 +76,9 @@ public class UserService implements UserDetailsService {
             user.setName(dto.getName());
         }
 
-        // Atualiza senha se vier preenchida
-        if (dto.getPassword() != null && !dto.getPassword().isBlank()) {
-            user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        // Atualiza telefone ser vier preenchido
+        if (dto.getPhone() != null && !dto.getPhone().isBlank()) {
+            user.setPassword(dto.getPhone());
         }
 
         return userRepository.save(user);
