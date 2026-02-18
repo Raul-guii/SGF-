@@ -1,0 +1,14 @@
+/* Remove margem padrão */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #0f172a; /* mesma cor da home */
+}
+
+/* Faz o Angular ocupar 100% da altura */
+app-root {
+  display: block;
+  min-height: 100%;
+  background-color: #0f172a;
+}
