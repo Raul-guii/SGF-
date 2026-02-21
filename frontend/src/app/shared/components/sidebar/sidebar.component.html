@@ -1,0 +1,15 @@
+<nav class="sidebar" [class.closed]="!isOpen">
+  <ul>
+    <li>
+      <a routerLink="/dashboard">Dashboard</a>
+    </li>
+
+    <li>
+      <a routerLink="/payment">Payments</a>
+    </li>
+
+    <li *ngIf="authService.hasRole('ROLE_ADMIN')">
+      <a routerLink="/admin/users">Users</a>
+    </li>
+  </ul>
+</nav>

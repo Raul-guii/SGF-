@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, UrlTree } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Injectable({
@@ -12,13 +12,23 @@ export class AuthGuard implements CanActivate {
     private router: Router
   ) {}
 
-  canActivate(): boolean | UrlTree {
-    const token = this.authService.getToken();
+  canActivate(route: ActivatedRouteSnapshot): boolean {
 
-    if (!token) {
-      return this.router.createUrlTree(['/login']);
-    }
-
-    return true;
+  if (!this.authService.isTokenValid()) {
+    this.authService.logout(); 
+    this.router.navigate(['/login']);
+    return false;
   }
+
+  const expectedRole = route.data['role'] || route.parent?.data['role'];
+  const userRole = this.authService.getRole();
+
+  if (expectedRole && userRole !== expectedRole) {
+    this.router.navigate(['/access-denied']);
+    return false;
+  }
+
+  return true;
+}
+
 }

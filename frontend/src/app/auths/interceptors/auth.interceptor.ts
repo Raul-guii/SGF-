@@ -34,7 +34,6 @@ export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
       //se o backend nao autorizar
     if (error.status === 401 || error.status === 403) {
       authService.logout();
-      router.navigateByUrl('/login');
     }
       //repassa o erro
       return throwError(() => error);
