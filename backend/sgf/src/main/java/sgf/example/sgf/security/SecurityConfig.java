@@ -34,7 +34,7 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(auth -> auth
                         // Permite acesso público apenas às rotas de autenticação
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/auth/login").permitAll()
                         // Restringe rotas administrativas apenas para usuários com role ADMIN
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         // Qualquer outra requisição exige autenticação

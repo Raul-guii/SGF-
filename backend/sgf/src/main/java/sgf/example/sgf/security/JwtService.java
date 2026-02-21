@@ -15,7 +15,6 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    // mínimo 32 bytes
     private static final String SECRET_KEY =
             "29dj2aJsW9!s0Xo*s47eT&8d8wmd)olq1Dfc9$dZ9Fn#sF";
 
@@ -25,13 +24,22 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails) {
+
+        String role = userDetails.getAuthorities()
+                .stream()
+                .findFirst()
+                .map(auth -> auth.getAuthority())
+                .orElse("USER");
+
         return Jwts.builder()
-                .setSubject(userDetails.getUsername()) // email
+                .setSubject(userDetails.getUsername())
+                .claim("role", role)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1h
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
+
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

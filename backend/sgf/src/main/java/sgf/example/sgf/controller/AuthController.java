@@ -29,13 +29,4 @@ public class AuthController {
 
         return ResponseEntity.ok(Map.of("token", token));
     }
-
-
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody RegisterUserDTO dto) {
-
-        User created = authService.registerUser(dto);
-
-        return ResponseEntity.status(201).body("Usuário criado com sucesso");
-    }
 }

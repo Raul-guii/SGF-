@@ -1,5 +1,6 @@
 package sgf.example.sgf.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -7,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import sgf.example.sgf.dto.RegisterUserDTO;
 import sgf.example.sgf.entity.Role;
 import sgf.example.sgf.entity.User;
@@ -34,14 +36,20 @@ public class AuthService {
     }
 
     // registra um usuario
-    public User registerUser(RegisterUserDTO dto) {
+    public String registerUser(RegisterUserDTO dto) {
 
         if (userRepository.existsByEmail(dto.getEmail())) {
-            throw new RuntimeException("Email já cadastrado");
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "Email já cadastrado"
+            );
         }
 
         if (userRepository.existsByCpf(dto.getCpf())) {
-            throw new RuntimeException("CPF já cadastrado");
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "CPF já cadastrado"
+            );
         }
 
         User user = new User();
@@ -52,7 +60,19 @@ public class AuthService {
         user.setPhone(dto.getPhone());
         user.setRole(Role.USER);
 
-        return userRepository.save(user);
+        userRepository.save(user);
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        dto.getEmail(),
+                        dto.getPassword()
+                )
+        );
+
+        UserDetails userDetails =
+                (UserDetails) authentication.getPrincipal();
+
+        return jwtService.generateToken(userDetails);
     }
 
     public String loginUser(String email, String password) {
