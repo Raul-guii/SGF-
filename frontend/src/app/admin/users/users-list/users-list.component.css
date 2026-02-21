@@ -1,0 +1,106 @@
+.users-list-page {
+  padding: 24px;
+}
+
+.users-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.users-header h2 {
+  margin: 0;
+  color: #111827;
+}
+
+.btn-create {
+  background: #2563eb;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.users-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.user-data {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-data strong {
+  color: #111827;
+}
+
+.user-data span {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.btn-delete,
+.btn-confirm,
+.btn-cancel {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: #fff;
+}
+
+.confirm-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.confirm-area span {
+  color: #7c2d12;
+  font-size: 14px;
+}
+
+.btn-confirm {
+  background: #b91c1c;
+  color: #fff;
+}
+
+.btn-cancel {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.state-message {
+  color: #4b5563;
+}
+
+.state-message.error {
+  color: #b91c1c;
+}

@@ -19,4 +19,14 @@ export class NavbarComponent {
   toggleMenu() {
     this.menuClick.emit();
   }
+
+  logout(){
+    this.authService.logout();
+  }
+
+  confirmLogout() {
+    const confirmed = window.confirm('Tem certeza que deseja sair?');
+    if (!confirmed) return;
+    this.logout();
+  }
 }
