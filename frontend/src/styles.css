@@ -1,0 +1,31 @@
+:root {
+  --sidebar-width: 240px;
+  --navbar-height: 64px;
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --primary: #1f4db8;
+  --text: #1e2738;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}

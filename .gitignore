@@ -30,3 +30,11 @@ Thumbs.db
 .env
 application-dev.properties
 application-local.properties
+
+# =========================
+# Frontend (Angular)
+# =========================
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/coverage/
