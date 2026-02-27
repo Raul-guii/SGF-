@@ -1,50 +1,61 @@
-import { Injectable, inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable, tap } from "rxjs";
-import { Router } from "@angular/router";
-import { environment } from "../../../environments/environment";
-
-interface LoginRequest {
-  email: string;
-  password: string;
-}
-
-interface LoginResponse {
-  token: string;
-}
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root',
 })
 export class AuthService {
-  private readonly http = inject(HttpClient);
-  private readonly router = inject(Router);
-  private readonly apiUrl = environment.apiUrl;
-  private readonly tokenKey = "auth_token";
 
-  login(email: string, password: string): Observable<LoginResponse> {
-    const payload: LoginRequest = { email, password };
+  private apiUrl = 'http://localhost:8080/auth';
+  private readonly TOKEN_KEY = 'token';
 
-    return this.http
-      .post<LoginResponse>(`${this.apiUrl}/auth/login`, payload)
-      .pipe(
-        tap((response) => {
-          localStorage.setItem(this.tokenKey, response.token);
-          this.router.navigateByUrl("/dashboard");
-        })
-      );
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
+
+  login(credentials: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/login`, credentials);
   }
 
-  logout(): void {
-    localStorage.removeItem(this.tokenKey);
-    this.router.navigateByUrl("/login");
+  register(user: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/register`, user);
+  }
+
+  saveToken(token: string): void {
+    localStorage.setItem(this.TOKEN_KEY, token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  isAuthenticated(): boolean {
-    return !!this.getToken();
+  logout(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
+    this.router.navigate(['/login']);
+  }
+
+  isTokenValid(): boolean {
+    const token = this.getToken();
+    if (!token) return false;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const exp = payload.exp * 1000;
+    return Date.now() < exp;
+  }
+
+  getRole(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.role || null;
+  }
+
+  hasRole(role: string): boolean {
+    if (!this.isTokenValid()) return false;
+    return this.getRole() === role;
   }
 }

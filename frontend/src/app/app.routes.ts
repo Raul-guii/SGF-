@@ -1,34 +1,33 @@
-import { Routes } from "@angular/router";
-import { authGuard } from "./core/guards/auth.guard";
-import { MainLayoutComponent } from "./layout/main-layout/main-layout.component";
+import { Routes } from '@angular/router';
+import { LoginComponent } from './features/auth/login/login';
+import { Dashboard } from './features/dashboard/dashboard';
+import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
+
+  // Login (rota pública)
   {
-    path: "login",
-    loadComponent: () =>
-      import("./pages/login/login.component").then((m) => m.LoginComponent)
+    path: 'login',
+    component: LoginComponent
   },
+
+  // Dashboard (rota protegida)
   {
-    path: "",
-    component: MainLayoutComponent,
-    canActivate: [authGuard],
-    children: [
-      {
-        path: "dashboard",
-        loadComponent: () =>
-          import("./pages/dashboard/dashboard.component").then(
-            (m) => m.DashboardComponent
-          )
-      },
-      {
-        path: "",
-        pathMatch: "full",
-        redirectTo: "dashboard"
-      }
-    ]
+    path: 'dashboard',
+    component: Dashboard,
+    canActivate: [AuthGuard]
   },
+
+  // Redirecionamento padrão
   {
-    path: "**",
-    redirectTo: "login"
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+
+  // Rota não encontrada
+  {
+    path: '**',
+    redirectTo: 'login'
   }
 ];

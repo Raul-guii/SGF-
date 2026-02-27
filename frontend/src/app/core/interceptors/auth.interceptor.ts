@@ -1,20 +1,41 @@
-import { HttpInterceptorFn } from "@angular/common/http";
-import { inject } from "@angular/core";
-import { AuthService } from "../services/auth.service";
+import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
+
   const authService = inject(AuthService);
+  const router = inject(Router);
+
   const token = authService.getToken();
 
-  if (!token) {
-    return next(req);
+  if (!req.url.includes('/auth')) {
+
+    if (token) {
+      req = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+    }
+
   }
 
-  const authorizedRequest = req.clone({
-    setHeaders: {
-      Authorization: `Bearer ${token}`
-    }
-  });
+  return next(req).pipe(
+    catchError(error => {
 
-  return next(authorizedRequest);
+      if (error.status === 401) {
+        authService.logout();
+      }
+
+      if (error.status === 403) {
+        router.navigate(['/access-denied']);
+      }
+
+      return throwError(() => error);
+    })
+  );
 };
