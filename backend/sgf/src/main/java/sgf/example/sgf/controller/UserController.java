@@ -31,7 +31,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/me")
+    @PutMapping("/update")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<User> updateUser(
             @AuthenticationPrincipal UserDetails userDetails,
