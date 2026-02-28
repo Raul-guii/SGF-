@@ -1,7 +1,9 @@
 <div class="dashboard-page">
   <header class="dashboard-header">
     <h1>Dashboard</h1>
+    <button (click)="logout()" class="btn-logout">Logout</button>
     <button>New Report</button>
+    <button *ngIf="isAdmin" class="admin-action" routerLink="/admin/user-list">Novo Usuario</button>
   </header>
 
   <section class="stats-grid">

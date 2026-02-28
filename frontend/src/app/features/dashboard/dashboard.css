@@ -38,6 +38,15 @@
   background: #1e293b;
 }
 
+.dashboard-header .admin-action {
+  border-color: #2c558a;
+  background: #1f3f6a;
+}
+
+.dashboard-header .admin-action:hover {
+  background: #275288;
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

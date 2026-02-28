@@ -1,0 +1,16 @@
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin-bottom: 12px;
+  padding: 8px;
+}
+
+button {
+  padding: 10px;
+  cursor: pointer;
+}

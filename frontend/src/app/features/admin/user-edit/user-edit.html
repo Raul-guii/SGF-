@@ -1,0 +1,13 @@
+<div class="container">
+  <h2>Editar Usuário</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <input type="text" placeholder="Nome" formControlName="name" />
+
+    <input type="text" placeholder="Telefone" formControlName="phone" />
+
+    <button type="submit">Salvar</button>
+
+  </form>
+</div>

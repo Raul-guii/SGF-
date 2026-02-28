@@ -1,0 +1,59 @@
+.access-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 14% 16%, rgba(41, 58, 89, 0.4), transparent 42%),
+    radial-gradient(circle at 86% 82%, rgba(64, 88, 130, 0.3), transparent 45%),
+    #090d14;
+}
+
+.access-card {
+  text-align: center;
+  padding: 40px 32px;
+  border-radius: 16px;
+  max-width: 460px;
+  width: 100%;
+  background: rgba(16, 22, 34, 0.92);
+  border: 1px solid #1d2738;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.access-card h1 {
+  margin: 0 0 14px;
+  font-size: 30px;
+  color: #f1f5f9;
+}
+
+.access-card p {
+  color: #bcc9dc;
+  margin: 0 0 24px;
+}
+
+.btn-back {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #f8fafc;
+  background: linear-gradient(135deg, #335a94, #294a78);
+  transition: background 0.25s ease, transform 0.12s ease;
+}
+
+.btn-back:hover {
+  background: linear-gradient(135deg, #3b67a8, #2f5588);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 560px) {
+  .access-card {
+    padding: 30px 22px;
+  }
+
+  .access-card h1 {
+    font-size: 26px;
+  }
+}

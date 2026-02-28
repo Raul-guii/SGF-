@@ -1,17 +1,12 @@
-export interface LoginDTO{
+export interface LoginRequest{
     email: string;
     password: string;
 }
 
-export interface RegisterUserDTO{
+export interface RegisterUserRequest{
     name: string;
     email: string;
     password: string;
     cpf: string;
-    phone: string;
-}
-
-export interface UpdateUserDTO{
-    name: string;
     phone: string;
 }

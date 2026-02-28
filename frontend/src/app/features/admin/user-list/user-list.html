@@ -1,0 +1,61 @@
+<div class="user-list-page">
+
+  <div class="header">
+    <h2>Gerenciamento de Usuários</h2>
+
+    <button routerLink="/admin/user-form" class="btn-primary">
+      + Novo Usuário
+    </button>
+  </div>
+
+  <div class="table-container">
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th class="actions-column">Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <span class="role-badge">
+              {{ user.role }}
+            </span>
+          </td>
+
+          <td class="actions">
+            <button 
+              [routerLink]="['/admin/user-edit', user.id]" 
+              class="btn-edit">
+              Editar
+            </button>
+
+            <button 
+              (click)="deleteUser(user.id)" 
+              class="btn-delete">
+              Excluir
+            </button>
+          </td>
+        </tr>
+
+        <tr *ngIf="!users || users.length === 0">
+          <td colspan="5" class="empty-state">
+            Nenhum usuário encontrado.
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+
+</div>

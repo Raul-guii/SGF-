@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../services/auth.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -12,8 +12,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   const token = authService.getToken();
 
+  // Não envia token para auth endpoints
   if (!req.url.includes('/auth')) {
-
     if (token) {
       req = req.clone({
         setHeaders: {
@@ -21,16 +21,18 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         }
       });
     }
-
   }
 
   return next(req).pipe(
     catchError(error => {
 
+      // 401 → logout obrigatório
       if (error.status === 401) {
         authService.logout();
+        router.navigate(['/login']);
       }
 
+      // 403 → acesso negado
       if (error.status === 403) {
         router.navigate(['/access-denied']);
       }

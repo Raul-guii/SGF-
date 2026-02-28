@@ -3,24 +3,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  background:
+    radial-gradient(circle at 15% 20%, rgba(41, 58, 89, 0.35), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(64, 88, 130, 0.28), transparent 45%),
+    #090d14;
 }
 
 .login-card {
   width: 350px;
   padding: 40px;
-
-  background: white;
-  border-radius: 10px;
-
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  background: rgba(16, 22, 34, 0.92);
+  border: 1px solid #1d2738;
+  border-radius: 12px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
 
 h2 {
   text-align: center;
   margin-bottom: 25px;
-  color: #333;
+  color: #e8eef8;
 }
 
 .form-group {
@@ -30,44 +31,45 @@ h2 {
 }
 
 label {
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 6px;
+  color: #bcc9dc;
 }
 
 input {
   padding: 12px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid #2a364b;
   font-size: 14px;
+  background: #0f1624;
+  color: #e8eef8;
 }
 
 input:focus {
   outline: none;
-  border-color: #2a5298;
+  border-color: #4f83d6;
+  box-shadow: 0 0 0 3px rgba(79, 131, 214, 0.2);
 }
 
 button {
   width: 100%;
   padding: 12px;
-
-  background: #2a5298;
+  background: linear-gradient(135deg, #335a94, #294a78);
   color: white;
-
   border: none;
   border-radius: 6px;
-
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-
-  transition: 0.3s;
+  transition: background 0.25s ease, transform 0.12s ease;
 }
 
 button:hover {
-  background: #1e3c72;
+  background: linear-gradient(135deg, #3b67a8, #2f5588);
+  transform: translateY(-1px);
 }
 
 .error {
-  color: red;
+  color: #ff7f93;
   text-align: center;
   margin-top: 10px;
 }
