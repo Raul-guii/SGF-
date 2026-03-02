@@ -1,0 +1,58 @@
+.container {
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+.actions a,
+.actions button {
+  margin: 0 5px;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  background: none;
+  font-weight: bold;
+}
+
+button {
+  color: red;
+}
+
+/* Status Colors */
+.ACTIVE {
+  color: green;
+  font-weight: bold;
+}
+
+.SUSPENDED {
+  color: orange;
+  font-weight: bold;
+}
+
+.CANCELLED {
+  color: red;
+  font-weight: bold;
+}
+
+.EXPIRED {
+  color: gray;
+  font-weight: bold;
+}

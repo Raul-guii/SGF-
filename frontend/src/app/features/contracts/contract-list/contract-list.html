@@ -1,0 +1,57 @@
+<div class="container">
+
+  <h2>Lista de Contratos</h2>
+
+  <div *ngIf="loading">Carregando contratos...</div>
+  <div *ngIf="error">Erro ao carregar contratos.</div>
+
+  <table *ngIf="!loading && !error">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descrição</th>
+        <th>Valor Mensal</th>
+        <th>Vencimento</th>
+        <th>Status</th>
+        <th>Usuário</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let contract of contracts">
+        <td>{{ contract.id }}</td>
+        <td>{{ contract.description }}</td>
+        <td>R$ {{ contract.valueMonthly | number:'1.2-2' }}</td>
+        <td>Dia {{ contract.dueDay }}</td>
+
+        <td>
+          <span [ngClass]="contract.contractStatus">
+            {{ contract.contractStatus }}
+          </span>
+        </td>
+
+        <td>{{ contract.user?.name }}</td>
+
+        <td class="actions">
+
+          <a [routerLink]="['/contracts', contract.id]">
+            Visualizar
+          </a>
+
+          <a [routerLink]="['/contracts', 'edit', contract.id]">
+            Editar
+          </a>
+
+          <button 
+            *ngIf="canCancel(contract.contractStatus)"
+            (click)="cancelContract(contract.id)">
+            Cancelar
+          </button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

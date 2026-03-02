@@ -6,6 +6,12 @@ import { UserEditComponent } from './features/admin/user-edit/user-edit';
 import { AuthGuard } from './core/guards/auth.guard';
 import { UserList } from './features/admin/user-list/user-list';
 import { UsersResolver } from './core/services/user-resolver.service';
+import { ContractUpdate } from './features/contracts/contract-update/contract-update';
+import { roleGuard } from './core/guards/role.guard';
+import { ContractForm } from './features/contracts/contract-form/contract-form';
+import { ContractList } from './features/contracts/contract-list/contract-list';
+import { ContractDetail } from './features/contracts/contract-detail/contract-detail';
+import { ContractsResolver } from './core/services/contract-resolver';
 
 export const routes: Routes = [
 
@@ -15,7 +21,7 @@ export const routes: Routes = [
     component: LoginComponent
   },
 
-  // Dashboard (protegido)
+  // Dashboard (ADMIN)
   {
     path: 'dashboard',
     component: Dashboard,
@@ -29,12 +35,11 @@ export const routes: Routes = [
 
     children: [
 
+      //USERS
       {
         path: 'user-list',
         component: UserList,
-        resolve: {
-          users: UsersResolver
-        }
+        resolve: {users: UsersResolver}
       },
 
       {
@@ -46,7 +51,48 @@ export const routes: Routes = [
         path: 'user-edit/:id',
         component: UserEditComponent
       }
+    ]
+  },
 
+    {
+    path: 'contracts',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: ContractList,
+        resolve: { contracts: ContractsResolver }
+      },
+      {
+        path: 'new',
+        component: ContractForm
+      },
+      {
+        path: 'edit/:id',
+        component: ContractUpdate
+      },  {
+    path: 'contracts',
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        component: ContractList,
+        resolve: { contracts: ContractsResolver }
+      },
+      {
+        path: 'new',
+        component: ContractForm
+      },
+      {
+        path: 'edit/:id',
+        component: ContractUpdate
+      },
+      {
+        path: ':id',
+        component: ContractDetail
+      }
+    ]
+  },
     ]
   },
 

@@ -2,8 +2,9 @@
   <header class="dashboard-header">
     <h1>Dashboard</h1>
     <button (click)="logout()" class="btn-logout">Logout</button>
-    <button>New Report</button>
-    <button *ngIf="isAdmin" class="admin-action" routerLink="/admin/user-list">Novo Usuario</button>
+    <button *ngIf="isAdmin" class="admin-action" routerLink="/admin/user-list">Users</button>
+    <button *ngIf="isAdmin" class="admin-action" routerLink="/contracts">Contracts</button>
+
   </header>
 
   <section class="stats-grid">

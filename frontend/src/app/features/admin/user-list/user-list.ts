@@ -3,6 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -17,6 +18,7 @@ export class UserList implements OnInit {
 
   private route = inject(ActivatedRoute);
   private userService = inject(UserService);
+  private router = inject(Router);
 
   ngOnInit(): void {
 
@@ -40,11 +42,14 @@ export class UserList implements OnInit {
     });
   }
 
-  deleteUser(id: number) {
-    if (!confirm('Excluir usuário?')) return;
+  delete(id: number) {
+    if (!confirm('Tem certeza que deseja excluir este usuário?')) return;
 
     this.userService.deleteUser(id).subscribe({
-      next: () => this.loadUsers()
+      next: () => {
+        alert('Usuário deletado com sucesso!');
+        this.users = this.users.filter(user => user.id !== id);
+      }
     });
   }
 }

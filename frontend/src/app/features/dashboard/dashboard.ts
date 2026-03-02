@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,14 +15,14 @@ export class Dashboard {
   
     isAdmin = false;
 
-  constructor(private authService: AuthService) {
+    constructor(private authService: AuthService, private userService: UserService) {
 
-    const role = this.authService.getUserRole();
+      const role = this.authService.getUserRole();
 
-    console.log('ROLE DO TOKEN:', role); 
+      console.log('ROLE DO TOKEN:', role); 
 
-    this.isAdmin = role === 'ROLE_ADMIN';
-  }
+      this.isAdmin = role === 'ROLE_ADMIN';
+    }
 
   logout(){
     this.authService.logout();

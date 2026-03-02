@@ -32,11 +32,15 @@ export class UserFormComponent {
     if (this.form.invalid) return;
 
     this.userService.createUser(this.form.value).subscribe({
-      next: () => {
+      next: (res) => {
+        console.log('SUCESSO:', res);
         alert('Usuário criado com sucesso');
         this.form.reset({ role: 'USER' });
       },
-      error: () => alert('Erro ao criar usuário')
+      error: (err) => {
+        console.log('ERRO COMPLETO:', err);
+        alert('Erro ao criar usuário');
+      }
     });
   }
 }
