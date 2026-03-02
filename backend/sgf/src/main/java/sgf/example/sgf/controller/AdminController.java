@@ -30,12 +30,19 @@ public class AdminController {
 
         authService.registerUser(dto);
 
-        return ResponseEntity.status(201).body("User created successfully");
+        return ResponseEntity.status(201).body(java.util.Map.of("message","User created successfully"));
     }
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<User>> listUsers() {
         return ResponseEntity.ok(userService.listUsers());
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUserById(id);
+        return ResponseEntity.noContent().build();
     }
 }

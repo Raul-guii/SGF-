@@ -24,13 +24,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.deleteUserById(id);
-        return ResponseEntity.noContent().build();
-    }
-
     @PutMapping("/update")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<User> updateUser(
